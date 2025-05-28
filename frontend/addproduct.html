@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>List an Item - Thrifted</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 15px;
+      }
+
+      .page-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .photo-info {
+        font-size: 0.8rem;
+        color: #666;
+        margin-bottom: 15px;
+      }
+
+      .photo-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      .photo-box {
+        aspect-ratio: 1/1;
+        border: 1px solid #ccc;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #f9f9f9;
+        font-size: 0.8rem;
+        color: #666;
+        text-align: center;
+        padding: 10px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .photo-box i {
+        font-size: 1.5rem;
+        margin-bottom: 5px;
+      }
+
+      .photo-box img.preview-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        pointer-events: none;
+      }
+      .photo-box .remove-btn {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background-color: rgba(0,0,0,0.6);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        font-size: 14px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+      }
+
+      .form-section {
+        margin-bottom: 20px;
+      }
+
+      .form-label {
+        font-weight: bold;
+        margin-bottom: 10px;
+        display: block;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        margin-bottom: 15px;
+      }
+
+      textarea.form-input {
+        min-height: 100px;
+        resize: vertical;
+      }
+
+      .price-input {
+        width: 150px;
+      }
+
+      .add-btn {
+        background-color: #000;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 0.9rem;
+      }
+
+      .footer {
+        background-color: #000;
+        color: white;
+        padding: 15px;
+        text-align: center;
+        margin-top: 30px;
+      }
+
+      .simple-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 15px;
+        border-bottom: 1px solid #eee;
+      }
+
+      .logo-small {
+        font-family: "Harley", sans-serif;
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      .header-icons {
+        display: flex;
+        gap: 15px;
+      }
+
+      .header-icons i {
+        font-size: 1.2rem;
+        color: #333;
+      }
+    </style>
+  </head>
+<body>
+  <header class="header">
+        <div class="logo">ThrifTED</div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search">
+        </div>
+    <div class="header-icons" id="headerIcons">
+        <a href="bag.html" title="Shopping Bag" class="icon-btn">Bag</a>
+        <a href="#" title="Favorites" class="icon-btn">Favorites</a>
+        <a href="profile.html" title="Profile" class="icon-btn profile-icon">
+            <img id="headerProfilePicture" src="" alt="Profile" style="display:none; width: 32px; height: 32px; border-radius: 50%;" />
+            Profile
+        </a>
+    </div>
+    </header>
+
+    <nav class="nav-categories" style="border-bottom: 1px solid #000;">
+      <button class="category-btn">FOR YOU</button>
+      <button class="category-btn">MEN</button>
+      <button class="category-btn">WOMEN</button>
+      <button class="category-btn">KIDS</button>
+    </nav>
+
+    <div class="container" style="margin-top: 140px;">
+      <h1 class="page-title">List an item</h1>
+
+      <form
+        action="/api/products"
+        method="POST"
+        enctype="multipart/form-data"
+        id="addProductForm"
+      >
+        <div class="form-section">
+          <p class="photo-info">
+            PHOTOS<br />
+            Add up to 8 photos in JPEG or PNG format.
+          </p>
+
+          <div class="photo-grid">
+            <div class="photo-box" id="coverPhotoBox">
+              <label for="coverPhoto">
+                <i class="fas fa-camera"></i><br />
+                Add Cover Photo
+              </label>
+              <input
+                type="file"
+                id="coverPhoto"
+                name="coverPhoto"
+                accept="image/jpeg, image/png"
+                class="form-input"
+                required
+              />
+            </div>
+            <div class="photo-box" id="frontPhotoBox">
+              <label for="frontPhoto">Front</label>
+              <input
+                type="file"
+                id="frontPhoto"
+                name="frontPhoto"
+                accept="image/jpeg, image/png"
+                class="form-input"
+              />
+            </div>
+            <div class="photo-box" id="backPhotoBox">
+              <label for="backPhoto">Back</label>
+              <input
+                type="file"
+                id="backPhoto"
+                name="backPhoto"
+                accept="image/jpeg, image/png"
+                class="form-input"
+              />
+            </div>
+            <div class="photo-box" id="sidePhotoBox">
+              <label for="sidePhoto">Side</label>
+              <input
+                type="file"
+                id="sidePhoto"
+                name="sidePhoto"
+                accept="image/jpeg, image/png"
+                class="form-input"
+              />
+            </div>
+            <div class="photo-box" id="labelPhotoBox">
+              <label for="labelPhoto">Label</label>
+              <input
+                type="file"
+                id="labelPhoto"
+                name="labelPhoto"
+                accept="image/jpeg, image/png"
+                class="form-input"
+              />
+            </div>
+            <div class="photo-box" id="detailPhotoBox">
+              <label for="detailPhoto">Detail</label>
+              <input
+                type="file"
+                id="detailPhoto"
+                name="detailPhoto"
+                accept="image/jpeg, image/png"
+                class="form-input"
+              />
+            </div>
+            <div class="photo-box" id="flawPhotoBox">
+              <label for="flawPhoto">Flaw</label>
+              <input
+                type="file"
+                id="flawPhoto"
+                name="flawPhoto"
+                accept="image/jpeg, image/png"
+                class="form-input"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <label for="name" class="form-label">Product Name</label>
+<input
+            type="text"
+            id="name"
+            name="name"
+            class="form-input"
+            autocomplete="off"
+            required
+          />
+        </div>
+
+        <div class="form-section">
+          <label for="description" class="form-label">Description</label>
+<textarea
+            id="description"
+            name="description"
+            class="form-input"
+            autocomplete="off"
+            required
+          ></textarea>
+        </div>
+
+        <div class="form-section">
+          <label for="category" class="form-label">Category</label>
+<select id="category" name="category" class="form-input" autocomplete="off" required>
+            <option value="" disabled selected>Select category</option>
+            <option value="menswear">Menswear</option>
+            <option value="womenswear">Womenswear</option>
+            <option value="kidswear">Kidswear</option>
+            <option value="unisex">Unisex</option>
+          </select>
+        </div>
+        <div class="form-section">
+          <label for="clothingType" class="form-label">Type of Clothing</label>
+<select id="clothingType" name="clothingType" class="form-input" autocomplete="off" required>
+            <option value="" disabled selected>Select type</option>
+            <option value="jacket">Jacket</option>
+            <option value="shirt">Shirt</option>
+            <option value="skirt">Skirt</option>
+            <option value="pants">Pants</option>
+            <option value="dress">Dress</option>
+            <option value="shorts">Shorts</option>
+            <option value="sweater">Sweater</option>
+            <option value="coat">Coat</option>
+            <option value="tshirt">T-Shirt</option>
+          </select>
+        </div>
+
+        <div class="form-section">
+          <label for="brand" class="form-label">Brand</label>
+<input
+            type="text"
+            id="brand"
+            name="brand"
+            class="form-input"
+            autocomplete="off"
+            required
+          />
+        </div>
+
+        <div class="form-section">
+          <label for="price" class="form-label">Price</label>
+<input
+            type="number"
+            id="price"
+            name="price"
+            class="form-input price-input"
+            autocomplete="off"
+            min="0"
+            step="0.01"
+            required
+          />
+        </div>
+
+        <div class="form-section">
+          <label for="condition" class="form-label">Condition</label>
+<select id="condition" name="condition" class="form-input" autocomplete="off" required>
+            <option value="" disabled selected>Select condition</option>
+            <option value="mint">Mint</option>
+            <option value="brand_new">Brand New</option>
+            <option value="used">Used</option>
+            <option value="good">Good</option>
+            <option value="fair">Fair</option>
+          </select>
+        </div>
+
+        <button type="submit" class="add-product-btn" style="display: block; margin-top: 10px; width: 100%; border-radius: 5px; padding: 12px 0; position: static; height: auto;">
+          Add Product
+        </button>
+      </form>
+
+<script src="js/addproduct.js"></script>
+<script src="js/profile.js"></script>
+<script src="js/auth-header.js"></script>
+  </body>
+</html>

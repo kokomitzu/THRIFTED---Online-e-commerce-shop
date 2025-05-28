@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thrifted - Online Thrift Store</title>
+    <!-- Removed fontawesome CSS link -->
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <header class="header">
+        <div class="logo">ThrifTED</div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search">
+        </div>
+        <div class="header-icons" id="headerIcons">
+<a href="bag.html" title="Shopping Bag" class="icon-btn" aria-label="Shopping Bag">
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4H6zm0 2h12l1.5 2H4.5L6 4zm0 4a2 2 0 0 1 4 0v2a2 2 0 0 1-4 0V8zm6 0a2 2 0 0 1 4 0v2a2 2 0 0 1-4 0V8z"/>
+  </svg>
+</a>
+            <button id="loginBtn" class="icon-btn" title="Log In" style="background:none; border:none; cursor:pointer; font-size:16px; margin-right:10px;">Log In</button>
+            <button id="signupBtn" class="icon-btn" title="Sign Up" style="background:none; border:none; cursor:pointer; font-size:16px;">Sign Up</button>
+            <a href="profile.html" title="Profile" class="icon-btn profile-icon">
+                Profile
+            </a>
+        </div>
+    </header>
+
+    <nav class="nav-categories" style="border-bottom: 1px solid #000;"> <!-- Added border under the navigation categories -->
+
+        <button class="category-btn">FOR YOU</button>
+        <button class="category-btn">MEN</button>
+        <button class="category-btn">WOMEN</button>
+        <button class="category-btn">KIDS</button>
+    </nav>
+
+    <img src="images/soobin.png" alt="Overlay image for men" style="position: absolute; top: 140px; left: -2.1%; width: 28%; z-index: 1;"> <!-- Adjusted width -->
+    <img src="images/tzuyuy.png" alt="Overlay image for women" style="position: absolute; top: 48px; left: 74.2ch; width: 21.5%; z-index: 1;"> <!-- Adjusted width -->
+    <main class="main-content">
+        <div class="featured-sections">
+            <div class="featured-section">
+                <img src="images/husxj.png" alt="Young man wearing a white t-shirt with text print, showcasing men's thrift fashion">
+
+                <div class="section-title" style="top: 60%;">MEN</div>
+                <div class="overlay"></div>
+                <button class="shop-now-btn">SHOP NOW</button>
+            </div>
+            <div class="featured-section">
+                <img src="images/ah.png" alt="Young woman wearing a brown top with a handbag, showcasing women's thrift fashion">
+                
+
+
+                <div class="section-title" style="top: 60%;">WOMEN</div>
+                <div class="overlay"></div>
+                <button class="shop-now-btn">SHOP NOW</button>
+            </div>
+        </div>
+
+        <div class="summer-banner">
+            <img src="images/nybnr.png" alt="Woman enjoying summer with flowers, wearing stylish swimwear">
+            <div class="banner-content">
+                <h2 class="banner-title">SUMMER IS HERE!</h2>
+                <p class="banner-text">Stay cool this summer with thrifted lightweight shirts, breezy shorts, and stylish swimwear—perfect for sunny adventures!</p>
+        </div>
+            <button class="banner-shop-btn">SHOP NOW</button>
+        </div>
+        <div class="featured-categories">
+            <h2>Featured categories</h2>
+            <div class="category-row">
+                <div class="category-item">
+                    <img src="images/cxx.png" alt="Various stylish second-hand bags and purses">
+                    <p>BAGS</p>
+                </div>
+                <div class="category-item">
+                    <img src="images/Untitled-1xs.png" alt="Vintage and second-hand t-shirts">
+                    <p>T-SHIRTS</p>
+                </div>
+                <div class="category-item">
+                    <img src="images/fdvfd.png" alt="Stylish thrifted dresses">
+                    <p>DRESSES</p>
+                </div>
+                <div class="category-item">
+                    <img src="images/sdcxsc.png" alt="Second-hand shoes in various styles">
+                    <p>SHOES</p>
+                </div>
+            </div>
+            <div class="view-all">
+                <button class="view-all-btn">Show more</button>
+            </div>
+        </div>
+    </main>
+
+    <button class="add-btn">+</button>
+
+    <footer class="footer">
+        <div>THRIFTED</div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+      <div class="modal-content">
+        <span class="close" id="closeLogin">&times;</span>
+        <h2>Log In</h2>
+        <form id="loginForm">
+          <label for="loginUsernameOrEmail">Handle or Email:</label>
+          <input type="text" id="loginUsernameOrEmail" name="usernameOrEmail" required>
+          <label for="loginPassword">Password:</label>
+          <input type="password" id="loginPassword" name="password" required>
+          <button type="submit">Log In</button>
+          <p><a href="forgot-password.html" style="color: blue; cursor: pointer; text-decoration: underline;">Forgot Password?</a></p>
+        </form>
+        <div id="loginMessage" class="message"></div>
+      </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+      <div class="modal-content">
+            <span class="close" id="closeSignup" style="cursor:pointer;">&times;</span>
+        <h2>Sign Up</h2>
+        <form id="signupForm">
+          <label for="signupUsername">Username:</label>
+          <input type="text" id="signupUsername" name="username" required>
+          <label for="signupHandle">Handle:</label>
+          <div style="position: relative;">
+            <span style="position: absolute; left: 8px; top: 50%; transform: translateY(-50%); color: #666;">@</span>
+            <input type="text" id="signupHandle" name="handle" required style="padding-left: 20px;">
+          </div>
+          <label for="signupEmail">Email:</label>
+          <input type="email" id="signupEmail" name="email" required>
+          <label for="signupPassword">Password:</label>
+          <input type="password" id="signupPassword" name="password" required>
+          <div id="passwordRequirements" style="font-size: 0.8rem; color: #666; margin-top: 5px;">
+            Password must be at least 8 characters, include uppercase and lowercase letters, a number, and a special character.
+          </div>
+          <button type="submit">Sign Up</button>
+        </form>
+        <div id="signupMessage" class="message"></div>
+      </div>
+    </div>
+
+<script src="js/modal-login.js"></script>
+<script src="js/homei.js"></script>
+<script src="js/auth-header.js"></script>
+</body>
+</html>

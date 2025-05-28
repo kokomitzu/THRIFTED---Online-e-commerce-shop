@@ -1,0 +1,65 @@
+<div id="signupModal" class="modal" style="display:none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
+  <div class="modal-content" style="background-color: #fefefe; margin: 10% auto; padding: 20px; border: 1px solid #888; width: 300px; position: relative;">
+    <span id="closeSignupModal" style="color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span>
+    <form id="signupForm">
+      <label for="signupUsername">Username:</label>
+      <input type="text" id="signupUsername" name="username" required>
+      <label for="signupHandle">Handle:</label>
+      <div style="position: relative;">
+        <span style="position: absolute; left: 8px; top: 50%; transform: translateY(-50%); color: #666;">@</span>
+        <input type="text" id="signupHandle" name="handle" required style="padding-left: 20px;">
+      </div>
+      <label for="signupEmail">Email:</label>
+      <input type="email" id="signupEmail" name="email" required>
+      <label for="signupPassword">Password:</label>
+      <input type="password" id="signupPassword" name="password" required>
+      <div id="passwordRequirements" style="font-size: 0.8rem; color: #666; margin-top: 5px;">
+        Password must be at least 8 characters, include uppercase and lowercase letters, a number, and a special character.
+      </div>
+      <button type="submit">Sign Up</button>
+    </form>
+    <div id="signupMessage" class="message"></div>
+  </div>
+</div>
+
+<script>
+  // Close modal when clicking the "x" button
+  document.getElementById('closeSignupModal').addEventListener('click', () => {
+    document.getElementById('signupModal').style.display = 'none';
+  });
+
+  // Close modal when clicking outside the modal content
+  window.addEventListener('click', (event) => {
+    const modal = document.getElementById('signupModal');
+    if (event.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+
+  // Password validation and dynamic feedback
+  const passwordInput = document.getElementById('signupPassword');
+  const passwordRequirements = document.getElementById('passwordRequirements');
+
+  passwordInput.addEventListener('input', () => {
+    const value = passwordInput.value;
+    const lengthValid = value.length >= 8;
+    const uppercaseValid = /[A-Z]/.test(value);
+    const lowercaseValid = /[a-z]/.test(value);
+    const numberValid = /[0-9]/.test(value);
+    const specialCharValid = /[!@#$%^&*(),.?":{}|<>]/.test(value);
+
+    let message = 'Password must be at least 8 characters, include uppercase and lowercase letters, a number, and a special character.';
+    let color = '#666';
+
+    if (lengthValid && uppercaseValid && lowercaseValid && numberValid && specialCharValid) {
+      message = 'Password meets all requirements.';
+      color = 'green';
+    } else {
+      message = 'Password must be at least 8 characters, include uppercase and lowercase letters, a number, and a special character.';
+      color = '#666';
+    }
+
+    passwordRequirements.textContent = message;
+    passwordRequirements.style.color = color;
+  });
+</script>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-papb+X+6Q6XQ+6XQ6XQ6XQ6XQ6XQ6XQ6XQ6XQ6XQ6XQ6XQ6XQ6XQ6XQ6XQ6XQ6XQ6XQ6XQ6XQ6XQ6XQ6XQ6XQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Additional styles to match home page design */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      background-color: #ffffff;
+      color: #000000;
+    }
+    header {
+      background-color: #ffffff;
+      color: #000000;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    header h1 {
+      font-family: 'Brush Script MT', cursive;
+      font-size: 2rem;
+      margin: 0;
+    }
+    nav a {
+      color: #000000;
+      margin-left: 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    main {
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #000;
+      padding-bottom: 10px;
+    }
+    #userListContainer, #productListContainer {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background-color: #ffffff;
+      color: #000000;
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    #message {
+      margin-top: 15px;
+      font-weight: bold;
+      color: red;
+    }
+  </style>
+</head>
+  <body>
+    <header class="header">
+        <div class="logo">ThrifTED</div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search">
+        </div>
+        <div class="header-icons" id="headerIcons">
+            <a href="bag.html" title="Shopping Bag" class="icon-btn">
+                <i class="fas fa-shopping-bag"></i>
+            </a>
+            <a href="profile.html" title="Profile" class="icon-btn profile-icon">
+                <i class="far fa-user"></i>
+            </a>
+        </div>
+    </header>
+
+  <main>
+    <h2>Admin Dashboard</h2>
+    <div id="userListContainer">
+      <h3>Users</h3>
+      <table id="userList" border="1" cellpadding="5" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Handle</th>
+            <th>Email</th>
+            <th>Is Admin</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div id="productListContainer">
+      <h3>Products</h3>
+      <table id="productList" border="1" cellpadding="5" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Brand</th>
+            <th>Price</th>
+            <th>Condition</th>
+            <th>Seller</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <p id="message"></p>
+  </main>
+
+  <script src="js/admin-dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>bwentii - Seller Profile</title>
+    <link rel="stylesheet" href="css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=GiganticFS&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        /* Same styles as profile.html */
+        .profile-container {
+            max-width: 100vw;
+            margin: 0;
+            padding: 0;
+        }
+        .profile-banner {
+            background-color: #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            height: 220px;
+            margin-bottom: 0;
+        }
+        .profile-info {
+            padding: 15px;
+            position: relative;
+            z-index: 20;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-top: -30px;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .profile-picture {
+            background-color: #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 8px solid white;
+            overflow: hidden;
+            flex-shrink: 0;
+            position: relative;
+            top: -20px;
+            margin-top: 0;
+        }
+        .profile-picture img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .profile-details {
+            margin-left: 0;
+            margin-top: 50px;
+            margin-bottom: 0;
+            text-align: left;
+            width: auto;
+            flex-grow: 1;
+        }
+        .username {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0;
+        }
+        .handle {
+            color: #666;
+            margin-bottom: 5px;
+            font-weight: normal;
+            font-size: 1.9rem;
+        }
+        .rating {
+            display: flex;
+            margin-top: 60px;
+            margin-bottom: 20px;
+        }
+        .star {
+            color: #ddd;
+            font-size: 2rem;
+        }
+        .bio {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .social-link {
+            color: #666;
+        }
+        /* Hide edit profile button for seller profile */
+        .edit-profile-btn {
+            display: none;
+        }
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #eee;
+            margin-top: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .tab.active {
+            border-bottom: 2px solid #000;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding: 15px;
+        }
+        .product-card {
+            width: 240px;
+            aspect-ratio: 1/1;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+        .product-image img {
+            width: 220px;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .product-title {
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .product-price {
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+        }
+        .product-condition {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 2px;
+        }
+        .product-likes {
+            display: flex;
+            align-items: center;
+            font-size: 0.8rem;
+        }
+        .like-icon {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">ThrifTED</div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search" />
+        </div>
+    <div class="header-icons">
+        <a href="bag.html" title="Shopping Bag" class="icon-btn">
+            Bag
+        </a>
+        <a href="#" title="Favorites" class="icon-btn">
+            Favorites
+        </a>
+        <a href="profile.html" title="Profile" class="icon-btn profile-icon">
+            Profile
+        </a>
+    </div>
+    </header>
+
+    <nav class="nav-categories" style="border-bottom: 1px solid #000;">
+        <button class="category-btn">FOR YOU</button>
+        <button class="category-btn">MEN</button>
+        <button class="category-btn">WOMEN</button>
+        <button class="category-btn">KIDS</button>
+    </nav>
+
+    <div class="profile-container" style="margin-top: 90px;">
+        <div class="profile-banner" style="background-color: #ccc; display: flex; align-items: center; justify-content: center;">
+            <img id="coverPhoto" src="" alt="Banner image" style="display: none;" />
+            <!-- Removed fontawesome icon -->
+        </div>
+
+        <div class="profile-info">
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+                <div class="profile-picture" style="background-color: #ccc; display: flex; align-items: center; justify-content: center;">
+                    <img id="profilePicture" src="" alt="Profile picture" style="display: none;" />
+                    <!-- Removed fontawesome icon -->
+                </div>
+
+                <div class="followers-info" style="display: flex; gap: 15px; font-size: 1rem;">
+                    <span><strong>0</strong> followers</span>
+                    <span><strong>0</strong> following</span>
+                </div>
+
+                <p class="bio" id="bioText" style="text-align: center; max-width: 250px;">Add a bio</p>
+            </div>
+
+            <div class="profile-details" style="margin-left: 20px;">
+                <h1 class="username"></h1>
+                <h1 class="handle"></h1>
+
+                <div class="rating">
+                    <!-- Removed fontawesome icons -->
+                </div>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <div class="tab active">Selling</div>
+            <div class="tab">Sold</div>
+            <div class="tab">Likes</div>
+        </div>
+
+        <div class="products-grid" id="sellingProductsGrid">
+            <p style="text-align: center; font-size: 1.2rem; color: #666; padding: 20px;" id="emptySellingMessage">
+                No products to display.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+            const sellingProductsGrid = document.getElementById('sellingProductsGrid');
+            const emptySellingMessage = document.getElementById('emptySellingMessage');
+
+            // Parse "user" query parameter from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const userParam = urlParams.get('user');
+
+            if (!userParam) {
+                emptySellingMessage.textContent = "No seller specified.";
+                return;
+            }
+
+            try {
+                // Fetch seller profile data
+                const userResponse = await fetch(`/api/users/${userParam}`, { credentials: 'include' });
+                if (!userResponse.ok) {
+                    emptySellingMessage.textContent = "Seller not found.";
+                    return;
+                }
+                const userToShow = await userResponse.json();
+
+                // Update profile info
+                const profilePicture = document.getElementById("profilePicture");
+                const coverPhoto = document.getElementById("coverPhoto");
+                const profileBannerIcon = document.querySelector(".profile-banner i.fas.fa-image");
+                const profilePictureIcon = document.querySelector(".profile-picture i.fas.fa-user");
+
+                if (userToShow.profilePictureUrl) {
+                    profilePicture.src = userToShow.profilePictureUrl;
+                    profilePicture.style.display = "block";
+                    profilePictureIcon.style.display = "none";
+                } else {
+                    profilePicture.src = "";
+                    profilePicture.style.display = "none";
+                    profilePictureIcon.style.display = "flex";
+                }
+
+                if (userToShow.coverPhotoUrl) {
+                    coverPhoto.src = userToShow.coverPhotoUrl;
+                    coverPhoto.style.display = "block";
+                    profileBannerIcon.style.display = "none";
+                } else {
+                    coverPhoto.src = "";
+                    coverPhoto.style.display = "none";
+                    profileBannerIcon.style.display = "flex";
+                }
+
+                if (userToShow.bio !== undefined) {
+                    document.getElementById("bioText").textContent = userToShow.bio;
+                }
+                if (userToShow.username) {
+                    document.querySelector(".username").textContent = userToShow.username;
+                    document.querySelector(".handle").textContent = '@' + userToShow.username;
+                }
+
+                // Fetch products sold by seller
+                const productsResponse = await fetch(`/api/products?seller=${userParam}`, { credentials: 'include' });
+                if (!productsResponse.ok) {
+                    emptySellingMessage.textContent = "Failed to load products.";
+                    return;
+                }
+                const products = await productsResponse.json();
+
+                if (products.length === 0) {
+                    emptySellingMessage.style.display = 'block';
+                    emptySellingMessage.textContent = "No products to display.";
+                } else {
+                    emptySellingMessage.style.display = 'none';
+                    products.forEach(product => {
+                        const productCard = document.createElement('div');
+                        productCard.className = 'product-card';
+                        productCard.style.cursor = 'pointer';
+
+                        productCard.addEventListener('click', () => {
+                            window.location.href = `product.html?id=${product._id || ''}`;
+                        });
+
+                        const imgDiv = document.createElement('div');
+                        imgDiv.className = 'product-image';
+                        const img = document.createElement('img');
+                        img.src = product.coverPhotoUrl || 'https://placehold.co/200x200/f5f5f5/666666?text=No+Image';
+                        img.alt = product.name || 'Product Image';
+                        img.style.borderRadius = '10px';
+                        img.style.width = '150px';
+                        img.style.height = '150px';
+                        img.style.objectFit = 'cover';
+                        imgDiv.appendChild(img);
+                        productCard.appendChild(imgDiv);
+
+                        const titleDiv = document.createElement('div');
+                        titleDiv.className = 'product-title';
+                        titleDiv.textContent = product.name || 'Unnamed Product';
+                        productCard.appendChild(titleDiv);
+
+                        const priceLikesDiv = document.createElement('div');
+                        priceLikesDiv.style.display = 'flex';
+                        priceLikesDiv.style.alignItems = 'center';
+                        priceLikesDiv.style.gap = '10px';
+
+                        const priceDiv = document.createElement('div');
+                        priceDiv.className = 'product-card-price';
+                        priceDiv.textContent = 'PHP ' + (product.price || '0.00');
+                        priceLikesDiv.appendChild(priceDiv);
+
+                        const likesDiv = document.createElement('div');
+                        likesDiv.style.display = 'flex';
+                        likesDiv.style.alignItems = 'center';
+                        likesDiv.style.gap = '5px';
+
+                        const heartIcon = document.createElement('i');
+                        heartIcon.className = 'fas fa-heart';
+                        heartIcon.style.color = 'red';
+                        likesDiv.appendChild(heartIcon);
+
+                        const likesCount = document.createElement('span');
+                        likesCount.textContent = product.likes || '0';
+                        likesDiv.appendChild(likesCount);
+
+                        priceLikesDiv.appendChild(likesDiv);
+                        productCard.appendChild(priceLikesDiv);
+
+                        const conditionDiv = document.createElement('div');
+                        conditionDiv.className = 'product-condition';
+                        conditionDiv.textContent = product.condition || 'Condition';
+                        productCard.appendChild(conditionDiv);
+
+                        sellingProductsGrid.appendChild(productCard);
+                    });
+                }
+            } catch (error) {
+                console.error('Error fetching seller profile or products:', error);
+                emptySellingMessage.style.display = 'block';
+                emptySellingMessage.textContent = "Error loading seller profile.";
+            }
+        });
+    </script>
+</body>
+</html>

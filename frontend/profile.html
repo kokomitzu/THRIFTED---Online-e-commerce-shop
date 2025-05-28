@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>bwentii - Thrifted Profile</title>
+    <!-- Removed fontawesome CSS link -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" onerror="this.onerror=null;this.href='css/roboto.css';" />
+    <link rel="stylesheet" href="./style.css" />
+    <style>
+        .profile-container {
+            max-width: 100vw;
+            margin: 0;
+            padding: 0;
+        }
+        .profile-banner {
+            background-color: #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            height: 220px; /* increased height to lower cover */
+            margin-bottom: 0; /* remove margin to allow overlap */
+            z-index: 0; /* ensure banner is behind profile info */
+        }
+        #coverPhoto {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            z-index: -1; /* place cover photo behind other elements */
+        }
+        .profile-info {
+            padding: 15px;
+            position: relative;
+            z-index: 20; /* higher z-index to appear in front */
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-top: -30px; /* raised entire profile-info block */
+            gap: 20px;
+            margin-bottom: 20px; /* space below profile-info to separate from cover photo */
+        }
+        .profile-picture {
+            background-color: #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 8px solid white;
+            overflow: hidden;
+            flex-shrink: 0;
+            position: relative;
+            top: -20px; /* raised profile picture relative to profile-info */
+            margin-top: 0; /* removed previous margin-top */
+        }
+        .profile-picture img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .profile-details {
+            margin-left: 0;
+            margin-top: 50px; /* increased margin to lower username and handle */
+            margin-bottom: 0;
+            text-align: left;
+            width: auto;
+            flex-grow: 1;
+        }
+        .username {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0;
+        }
+        .handle {
+            color: #666;
+            margin-bottom: 5px;
+            font-weight: normal;
+            font-size: 1.9rem;
+        }
+        .rating {
+            display: flex;
+            margin-top: 60px;
+            margin-bottom: 20px;
+        }
+        .star {
+            color: #ddd;
+            font-size: 2rem;
+        }
+        .bio {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .social-link {
+            color: #666;
+        }
+        .edit-profile-btn {
+            position: absolute;
+            right: 15px;
+            top: 25%;
+            transform: translateY(-25%);
+            border: 1px solid #000;
+            background: white;
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            z-index: 20;
+        }
+        .add-item-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: #000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+        }
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #eee;
+            margin-top: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .tab.active {
+            border-bottom: 2px solid #000;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding: 15px;
+        }
+        .product-card {
+            width: 240px;
+            aspect-ratio: 1/1;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+        .product-image img {
+            width: 220px;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 10px; /* Added corner radius */
+        }
+        .product-title {
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .product-price {
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+        }
+        .product-condition {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 2px;
+        }
+        .product-likes {
+            display: flex;
+            align-items: center;
+            font-size: 0.8rem;
+        }
+        .like-icon {
+            margin-right: 5px;
+        }
+        /* Edit Profile Modal Styles */
+        #editProfileModal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+        }
+        #editProfileModal .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 400px;
+            border-radius: 8px;
+            position: relative;
+        }
+        #editProfileModal .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        #editProfileModal label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        #editProfileModal input[type="file"] {
+            margin-top: 5px;
+        }
+        #editProfileModal img.preview {
+            margin-top: 10px;
+            max-width: 100%;
+            max-height: 150px;
+            display: block;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #editProfileModal button.save-btn {
+            margin-top: 15px;
+            background-color: #000;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+  <header class="header">
+        <div class="logo">ThrifTED</div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search">
+        </div>
+    <div class="header-icons" id="headerIcons">
+        <a href="bag.html" title="Shopping Bag" class="icon-btn">Bag</a>
+        <a href="#" title="Favorites" class="icon-btn">Favorites</a>
+        <a href="profile.html" title="Profile" class="icon-btn profile-icon">
+            <img id="headerProfilePicture" src="" alt="Profile" style="display:none; width: 32px; height: 32px; border-radius: 50%;" />
+            Profile
+        </a>
+    </div>
+    </header>
+
+    <nav class="nav-categories" style="border-bottom: 1px solid #000;">
+        <button class="category-btn">FOR YOU</button>
+        <button class="category-btn">MEN</button>
+        <button class="category-btn">WOMEN</button>
+        <button class="category-btn">KIDS</button>
+    </nav>
+
+    <div class="profile-container" style="margin-top: 90px;">
+        <div class="profile-banner" style="background-color: #ccc; display: flex; align-items: center; justify-content: center;">
+<img id="coverPhoto" src="" style="display: none;" />
+            <i class="fas fa-image" style="font-size: 4rem; color: #999;"></i>
+        </div>
+
+        <div class="profile-info">
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+                <div class="profile-picture" style="background-color: #ccc; display: flex; align-items: center; justify-content: center;">
+<img id="profilePicture" src="" alt="Profile picture of bwentii" style="display: none;" />
+                    <i class="fas fa-user" style="font-size: 3rem; color: #666;"></i>
+                </div>
+
+                <div class="followers-info" style="display: flex; gap: 15px; font-size: 1rem;">
+                    <span><strong>0</strong> followers</span>
+                    <span><strong>0</strong> following</span>
+                </div>
+
+                <p class="bio" id="bioText" style="text-align: center; max-width: 250px;">Add a bio</p>
+            </div>
+
+            <button class="edit-profile-btn" id="editProfileBtn" style="z-index: 10;">Edit profile</button>
+
+            <div class="profile-details" style="margin-left: 20px;">
+                <h1 class="username"></h1>
+                <h1 class="handle"></h1>
+
+                <div class="rating">
+                    <i class="far fa-star star"></i>
+                    <i class="far fa-star star"></i>
+                    <i class="far fa-star star"></i>
+                    <i class="far fa-star star"></i>
+                    <i class="far fa-star star"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <div class="tab active">Selling</div>
+            <div class="tab">Sold</div>
+            <div class="tab">Likes</div>
+        </div>
+
+        <div class="products-grid" id="sellingProductsGrid">
+            <p style="text-align: center; font-size: 1.2rem; color: #666; padding: 20px;" id="emptySellingMessage">
+                Press the + button to list a product.
+            </p>
+        </div>
+
+        <script src="js/profile.js"></script>
+    </div>
+
+    <button class="add-item-btn">+</button>
+
+    <!-- Edit Profile Modal -->
+    <div id="editProfileModal">
+        <div class="modal-content">
+            <span class="close" id="closeEditProfile">&times;</span>
+            <h2>Edit Profile</h2>
+            <form id="editProfileForm" enctype="multipart/form-data">
+                <label for="profilePictureInput">Profile Picture</label>
+                <input type="file" id="profilePictureInput" name="profilePicture" accept="image/*" />
+                <img id="profilePicturePreview" class="preview" src="" alt="Profile Picture Preview" style="display:none;" />
+
+                <label for="coverPhotoInput">Cover Photo</label>
+                <input type="file" id="coverPhotoInput" name="coverPhoto" accept="image/*" />
+                <img id="coverPhotoPreview" class="preview" src="" alt="Cover Photo Preview" style="display:none;" />
+
+                <label for="bioInput">Bio</label>
+                <textarea id="bioInput" name="bio" rows="4" style="width: 100%;"></textarea>
+
+                <button type="submit" class="save-btn">Save Changes</button>
+                <button type="button" id="removeImagesBtn" style="margin-left: 10px; background-color: #c00; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">Remove Images</button>
+            </form>
+            <p id="editProfileMessage"></p>
+        </div>
+    </div>
+
+    <script src="js/auth-header.js"></script>
+    <script src="js/profile.js"></script>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <h2>Log In</h2>
+            <form id="loginForm">
+                <label for="usernameOrEmail">Username or Email</label>
+                <input type="text" id="usernameOrEmail" name="usernameOrEmail" required />
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required />
+                <button type="submit">Log In</button>
+                <p><a href="forgot-password.html" style="color: blue; cursor: pointer; text-decoration: underline;">Forgot Password?</a></p>
+                <p id="loginMessage"></p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

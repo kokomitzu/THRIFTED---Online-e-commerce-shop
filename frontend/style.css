@@ -1,0 +1,626 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #fff;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 12px;
+    border-bottom: 1px solid #000;     background-color: #fff; /* Added background color to prevent transparency */
+
+    position: fixed; /* Make the header fixed */
+    top: 0; /* Position it at the top */
+    width: 100%; /* Ensure it spans the full width */
+    z-index: 1000; /* Ensure it stays above other content */
+}
+
+.logo {
+    font-family: 'Harley';
+    font-size: 4rem;
+    color: #000;
+    margin-left: 20px; /* Adjusting the logo position */
+}
+
+.search-bar {
+    flex-grow: 1;
+    max-width: 350px;
+    margin: 0 20px;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: 2px solid black; /* Changed border color to black */
+    outline: none;
+}
+
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #000;
+}
+.login-btn {
+    background-color: #000;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+}
+.profile-icon {
+    width: 35px;
+    height: 35px;
+    background-color: #ddd;
+}
+
+/* Additional styles to fix icon 0x0 size issue */
+.icon-btn i {
+    display: inline-block;
+    width: 1.2em;
+    height: 1.2em;
+}
+.profile-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.profile-icon i {
+    display: inline-block;
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+    color: white;
+    text-align: center;
+    line-height: 1.5em;
+    font-size: 1.2em;
+}
+
+.nav-categories {
+    display: flex;
+    justify-content: flex-start; /* Changed to flex-start for side-by-side buttons */
+    padding: 10px;
+    background-color: #f9f9f9;
+    overflow-x: auto;
+    white-space: nowrap;
+    border-bottom: 1px solid #e0e0e0;
+    position: fixed; /* Make the navigation fixed */
+    top: 90px; /* Adjusted this value to lower the navigation */
+    width: 100%; /* Ensure it spans the full width */
+    z-index: 999; /* Ensure it stays above other content */
+}
+
+.category-btn {
+    background-color: #000;
+    color: white;
+    border: none;
+    padding: 7px 12px;
+    border-radius: 5px;
+    margin: 0 2px; /* Reduced margin to bring buttons closer together */
+    cursor: pointer;
+    font-family: 'Gigantic FS';
+    font-size: 10px;
+}
+
+.main-content {
+    padding: 15px;
+    margin-top: 120px; /* Increased margin-top to fix overlapping content */
+}
+
+.featured-sections {
+    display: flex;
+    gap: 38px;
+    margin-bottom: 30px;
+    margin-top: 70px; /* Increased margin-top to lower the featured sections */
+}
+
+.featured-section {
+    position: relative;
+    flex: 1;
+    min-height: 55px; /* Increased from 230px to 300px */
+    border: 2px solid #000000;
+    border-radius: 15px;
+    overflow: hidden;
+    font-family: 'Gigantic FS';
+}
+
+.featured-section img {
+    width: 90%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.section-title {
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    transform: translateY(-50%);
+    font-size: 3rem;
+    color: #000;
+    font-family: 'Gigantic FS';
+    font-weight: bold; /* Added bold font weight */
+}
+
+.shop-now-btn {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background-color: #000;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.tagline {
+    text-align: center;
+    font-size: 2rem;
+    font-family: 'Gigantic FS';
+    margin: 20px 0;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.summer-banner {
+    position: relative;
+    height: 230px; /* Decreased height of the summer banner */
+    width: 90%;
+    background-color: #6ecff6;
+    overflow: hidden;
+    margin: 20px auto; /* Center the banner */
+}
+
+.summer-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Removed incomplete property */
+}
+
+.banner-content {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: white;
+    max-width: 60%;
+}
+
+.banner-title {
+    font-family: 'Brush Script MT', cursive;
+    font-size: 3rem;
+}
+
+.banner-text {
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.banner-shop-btn {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background-color: #000;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.add-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: #000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 100;
+}
+
+.featured-categories {
+    margin-bottom: 30px;
+}
+
+.featured-categories h2 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.category-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.category-item {
+    flex: 1;
+    position: relative;
+    text-align: center;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.category-item:hover {
+    transform: translateY(-5px);
+}
+
+.category-item img {
+    width: 230px;
+    height: 230px;
+    object-fit: contain;
+    border-radius: 8%;
+}
+
+.category-item p {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: rgb(0, 0, 0);
+    padding: 5px;
+    border-radius: 3px;
+    width: fit-content;
+}
+
+.view-all {
+    text-align: center;
+    margin: 15px 0;
+}
+
+.view-all-btn {
+    background-color: transparent;
+    border: 1px solid #000;
+    color: #000;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.recommended {
+    margin-bottom: 30px;
+}
+
+.recommended h2 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+.product-card {
+    border: 1px solid #eee;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.product-image {
+    height: 180px;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px !important;
+}
+
+.seller-info {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 3px 8px;
+    border-radius: 15px;
+    font-size: 0.7rem;
+}
+
+.seller-avatar {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.heart-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.product-details {
+    padding: 10px;
+}
+
+.product-title {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.product-price {
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.product-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    color: #666;
+}
+
+.likes {
+    display: flex;
+    align-items: center;
+}
+
+.likes i {
+    margin-right: 3px;
+}
+
+/* Additional styles to fix icon 0x0 size issue */
+.icon-btn i {
+    display: inline-block;
+    width: 1.2em;
+    height: 1.2em;
+}
+.profile-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.profile-icon i {
+    display: inline-block;
+    width: 1.5em;
+    height: 1.5em;
+}
+
+.footer {
+    background-color: #000;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-weight: bold;
+}
+
+.add-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 100;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .featured-sections {
+        flex-direction: column;
+    }
+    
+    .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+    
+    .category-row {
+        flex-wrap: wrap;
+    }
+    
+    .category-item {
+        flex-basis: calc(50% - 10px);
+        margin-bottom: 15px;
+    }
+}
+
+.indicator-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px; /* Space between items and indicators */
+}
+
+.indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #ddd; /* Default color for indicators */
+    margin: 0 5px; /* Space between indicators */
+    cursor: pointer; /* Change cursor to pointer */
+}
+
+.indicator.active {
+    background-color: #000; /* Color for active indicator */
+}
+
+/* Modal styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 2000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto; /* 10% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-family: 'Gigantic FS', Arial, sans-serif;
+}
+
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-content label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.modal-content input {
+    margin-bottom: 15px;
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.modal-content button {
+    background-color: #000;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal-content button:hover {
+    background-color: #333;
+}
+
+.message {
+    margin-top: 10px;
+    font-size: 0.9rem;
+}
+
+/* Profile popup menu styles */
+.profile-popup-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    z-index: 1000;
+    min-width: 150px;
+}
+
+.profile-popup-menu .popup-menu-item {
+    display: block;
+    padding: 10px;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.profile-popup-menu .popup-menu-item:hover {
+    background-color: #f0f0f0;
+    color: black;
+}
+
+/* Button styles for product page */
+.btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Gigantic FS';
+    font-weight: bold;
+    border: none;
+    background-color: rgba(255, 0, 0, 0.9);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 20px;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}

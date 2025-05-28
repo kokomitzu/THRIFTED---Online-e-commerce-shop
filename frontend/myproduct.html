@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FERRUM BASKETBALL GRAY - ThrifTED</title>
+    <!-- Removed fontawesome CSS link -->
+    <link href="https://fonts.googleapis.com/css2?family=GiganticFS&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        .product-detail {
+            max-width: 1200px;
+            margin: 90px auto 0;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .product-detail {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Image Gallery */
+        .product-images {
+            position: relative;
+        }
+
+        .main-image {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+
+        .thumbnail-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .thumbnail {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            cursor: pointer;
+            border-radius: 4px;
+            border: 2px solid transparent;
+        }
+
+        .thumbnail.active {
+            border-color: #000;
+        }
+
+        /* Product Info */
+        .product-info {
+            padding: 20px 0;
+        }
+
+        .product-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            font-family: 'Gigantic FS', sans-serif;
+        }
+
+        .product-price {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .product-condition {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .product-details {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .action-buttons {
+            display: grid;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border-radius: 4px;
+            font-family: 'Gigantic FS', sans-serif;
+            cursor: pointer;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .btn-edit {
+            background: #fff;
+            border: 1px solid #000;
+            color: #000;
+        }
+
+        .btn-delete {
+            background: #ff4b4b;
+            border: none;
+            color: white;
+        }
+
+        .posted-time {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+
+        .likes {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        /* More from you section */
+        .section-title {
+            font-family: 'Gigantic FS', sans-serif;
+            font-size: 1.2rem;
+            margin: 40px 0 20px;
+            grid-column: 1 / -1;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            grid-column: 1 / -1;
+        }
+
+        .product-card {
+            border: 1px solid #eee;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .product-card img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+        }
+
+        .product-card-info {
+            padding: 10px;
+        }
+
+        .product-card-title {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .product-card-price {
+            font-weight: bold;
+        }
+
+        .view-more {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .view-more-btn {
+            background: #000;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Gigantic FS', sans-serif;
+        }
+
+        /* Tags */
+        .tags {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .tag {
+            color: #666;
+            text-decoration: underline;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo" id="logo">ThrifTED</div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search">
+        </div>
+    <div class="header-icons">
+        <a href="#" class="icon-btn profile-icon" id="profileIcon">User</a>
+        <a href="#" class="icon-btn" id="favoritesIcon">Favorites</a>
+        <a href="#" class="icon-btn" id="bagIcon">Bag</a>
+    </div>
+    </header>
+
+    <nav class="nav-categories">
+        <button class="category-btn">FOR YOU</button>
+        <button class="category-btn">MEN</button>
+        <button class="category-btn">WOMEN</button>
+        <button class="category-btn">KIDS</button>
+    </nav>
+
+    <main class="product-detail">
+        <div class="product-images">
+            <img id="coverPhoto" src="https://placehold.co/600x600/f5f5f5/666666?text=No+Image" alt="Product Cover Photo" class="main-image" />
+            <div class="thumbnail-grid" id="thumbnailGrid" style="display:none;">
+                <!-- Additional thumbnails can be added here if needed -->
+            </div>
+        </div>
+
+        <div class="product-info">
+            <h1 id="productTitle" class="product-title">Product Title</h1>
+            <div id="productPrice" class="product-price">PHP 0.00</div>
+            <div id="productCondition" class="product-condition">Condition</div>
+            <div id="productDetails" class="product-details">
+                <p id="productName">Name</p>
+                <p id="productDescription">Description</p>
+                <p id="productCategory">Category</p>
+                <p id="productBrand">Brand</p>
+            </div>
+            <div class="tags" id="productTags" style="display:none;">
+                <!-- Tags can be dynamically added here -->
+            </div>
+            <div class="likes">
+                <i class="far fa-heart"></i>
+                <span>0</span>
+            </div>
+            <div class="posted-time" id="postedTime">Listed just now</div>
+            <div class="action-buttons">
+                <button id="editBtn" class="btn btn-edit">EDIT</button>
+                <button id="deleteBtn" class="btn btn-delete">DELETE</button>
+            </div>
+            <div id="editButtons" style="display:none; margin-top: 10px;">
+                <button id="saveBtn" class="btn btn-edit">SAVE</button>
+                <button id="cancelBtn" class="btn btn-delete">CANCEL</button>
+            </div>
+        </div>
+        <h2 class="section-title">More from you</h2>
+        <div class="products-grid">
+        </div>
+=======
+            <div class="action-buttons">
+                <button id="editBtn" class="btn btn-edit">EDIT</button>
+                <button id="deleteBtn" class="btn btn-delete">DELETE</button>
+            </div>
+            <div id="editButtons" style="display:none; margin-top: 10px;">
+                <button id="saveBtn" class="btn btn-edit">SAVE</button>
+                <button id="cancelBtn" class="btn btn-delete">CANCEL</button>
+            </div>
+        </div>
+        <h2 class="section-title">More from you</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <img src="https://placehold.co/200x200/f5f5f5/666666?text=Cream+Cardigan" alt="Cream Cardigan">
+                <div class="product-card-info">
+                    <div class="product-card-title">Cream Cardigan</div>
+                    <div class="product-card-price">PHP 500</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="https://placehold.co/200x200/f5f5f5/666666?text=Forever+21+Black+Dress" alt="Forever 21 Black Dress">
+                <div class="product-card-info">
+                    <div class="product-card-title">Forever 21 Black Dress</div>
+                    <div class="product-card-price">PHP 300</div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Recommended for you</h2>
+        <!-- <div class="products-grid">
+            <div class="product-card">
+                <img src="https://placehold.co/200x200/f5f5f5/666666?text=Vintage+Tee" alt="Vintage 90s T-Shirt">
+                <div class="product-card-info">
+                    <div class="product-card-title">Vintage 90s T-Shirt</div>
+                    <div class="product-card-price">PHP 450</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="https://placehold.co/200x200/f5f5f5/666666?text=Denim+Shorts" alt="Vintage Denim Shorts">
+                <div class="product-card-info">
+                    <div class="product-card-title">Vintage Denim Shorts</div>
+                    <div class="product-card-price">PHP 350</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="https://placehold.co/200x200/f5f5f5/666666?text=Sneakers" alt="Vintage Nike Sneakers">
+                <div class="product-card-info">
+                    <div class="product-card-title">Vintage Nike Sneakers</div>
+                    <div class="product-card-price">PHP 800</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="view-more">
+            <button class="view-more-btn">View more</button>
+        </div>
+    </main> -->
+
+        <script>
+            // Image gallery functionality
+            document.addEventListener('DOMContentLoaded', function() {
+                const mainImage = document.querySelector('.main-image');
+                const thumbnails = document.querySelectorAll('.thumbnail');
+
+                thumbnails.forEach(thumbnail => {
+                    thumbnail.addEventListener('click', function() {
+                        // Update main image
+                        mainImage.src = this.src.replace('150x150', '600x600');
+                        mainImage.alt = this.alt;
+
+                        // Update active thumbnail
+                        thumbnails.forEach(t => t.classList.remove('active'));
+                        this.classList.add('active');
+                    });
+    });
+
+        // Like button functionality
+        // Removed fontawesome class toggling
+        const likeBtn = document.querySelector('.likes i');
+        if (likeBtn) {
+            likeBtn.addEventListener('click', function() {
+                // Toggle like state without fontawesome classes
+                if (this.textContent === '♥') {
+                    this.textContent = '♡';
+                } else {
+                    this.textContent = '♥';
+                }
+            });
+        }
+
+                // Load product data from localStorage and update page
+                async function loadUserProduct() {
+                    try {
+                        // Parse product ID from URL query string
+                        const urlParams = new URLSearchParams(window.location.search);
+                        const productId = urlParams.get('id');
+
+                        let productData;
+
+                        if (productId) {
+                            // Fetch product by ID
+                            const response = await fetch(`/api/products/${productId}`, { credentials: 'include' });
+                            if (!response.ok) {
+                                alert('Failed to load the product.');
+                                window.location.href = 'homei.html';
+                                return;
+                            }
+                            productData = await response.json();
+                        } else {
+                            // Fallback: fetch user's products and show the first one
+                            const response = await fetch('/api/myproducts', { credentials: 'include' });
+                            if (!response.ok) {
+                                alert('Failed to load your products.');
+                                window.location.href = 'homei.html';
+                                return;
+                            }
+                            const products = await response.json();
+                            if (products.length === 0) {
+                                alert('No products found for your account.');
+                                window.location.href = 'homei.html';
+                                return;
+                            }
+                            productData = products[0];
+                        }
+
+                        // Update cover photo
+                        if (productData.coverPhotoUrl) {
+                            const coverPhoto = document.getElementById('coverPhoto');
+                            coverPhoto.src = productData.coverPhotoUrl;
+                            coverPhoto.alt = productData.description || 'Product Cover Photo';
+                        }
+
+                        // Update product info display elements
+                        document.getElementById('productTitle').textContent = productData.name || 'Product Name';
+                        document.title = productData.name || 'Product Detail - ThrifTED';
+                        document.getElementById('productPrice').textContent = 'PHP ' + (productData.price || '0.00');
+                        document.getElementById('productCondition').textContent = productData.condition || 'Condition';
+                        document.getElementById('productDescription').textContent = productData.description || 'Description';
+                        document.getElementById('productCategory').textContent = 'Category: ' + (productData.category || '');
+                        document.getElementById('productBrand').textContent = 'Brand: ' + (productData.brand || '');
+
+                        // Cache references to elements for editing
+                        const editBtn = document.getElementById('editBtn');
+                        const deleteBtn = document.getElementById('deleteBtn');
+                        const saveBtn = document.getElementById('saveBtn');
+                        const cancelBtn = document.getElementById('cancelBtn');
+                        const editButtons = document.getElementById('editButtons');
+                        const productDetails = document.getElementById('productDetails');
+
+                        // Create editable inputs for product details
+                        const inputs = {};
+                        ['name', 'description', 'category', 'brand', 'price', 'condition'].forEach(field => {
+                            const p = document.createElement('p');
+                            const label = document.createElement('label');
+                            label.textContent = field.charAt(0).toUpperCase() + field.slice(1) + ': ';
+                            const input = document.createElement(field === 'description' ? 'textarea' : 'input');
+                            if (field === 'price') {
+                                input.type = 'number';
+                                input.min = '0';
+                                input.step = '0.01';
+                            } else if (field === 'condition') {
+                                // For condition, create a select element
+                                const select = document.createElement('select');
+                                ['Mint', 'Brand New', 'Used', 'Good', 'Fair'].forEach(optionText => {
+                                    const option = document.createElement('option');
+                                    option.value = optionText.toLowerCase().replace(' ', '_');
+                                    option.textContent = optionText;
+                                    if (option.value === (productData.condition || '').toLowerCase()) {
+                                        option.selected = true;
+                                    }
+                                    select.appendChild(option);
+                                });
+                                inputs[field] = select;
+                                p.appendChild(label);
+                                p.appendChild(select);
+                                productDetails.appendChild(p);
+                                return;
+                            }
+                            input.value = productData[field] || '';
+                            inputs[field] = input;
+                            p.appendChild(label);
+                            p.appendChild(input);
+                            productDetails.appendChild(p);
+                        });
+
+                        // Hide original product details text elements
+                        ['productName', 'productDescription', 'productCategory', 'productBrand'].forEach(id => {
+                            const el = document.getElementById(id);
+                            if (el) el.style.display = 'none';
+                        });
+
+                        // Initially hide inputs
+                        Object.values(inputs).forEach(input => input.style.display = 'none');
+
+                        // Edit mode flag
+                        let isEditing = false;
+
+                        function toggleEditMode(editing) {
+                            isEditing = editing;
+                            if (editing) {
+                                // Show inputs, hide text
+                                Object.values(inputs).forEach(input => input.style.display = '');
+                                ['productName', 'productDescription', 'productCategory', 'productBrand'].forEach(id => {
+                                    const el = document.getElementById(id);
+                                    if (el) el.style.display = 'none';
+                                });
+                                editBtn.style.display = 'none';
+                                deleteBtn.style.display = 'none';
+                                editButtons.style.display = '';
+                            } else {
+                                // Hide inputs, show text
+                                Object.values(inputs).forEach(input => input.style.display = 'none');
+                                ['productName', 'productDescription', 'productCategory', 'productBrand'].forEach(id => {
+                                    const el = document.getElementById(id);
+                                    if (el) el.style.display = '';
+                                });
+                                editBtn.style.display = '';
+                                deleteBtn.style.display = '';
+                                editButtons.style.display = 'none';
+                            }
+                        }
+
+                        editBtn.addEventListener('click', () => {
+                            toggleEditMode(true);
+                        });
+
+                        cancelBtn.addEventListener('click', () => {
+                            // Reset inputs to original values
+                            Object.keys(inputs).forEach(field => {
+                                if (inputs[field].tagName === 'SELECT') {
+                                    inputs[field].value = productData[field] || '';
+                                } else {
+                                    inputs[field].value = productData[field] || '';
+                                }
+                            });
+                            toggleEditMode(false);
+                        });
+
+                        saveBtn.addEventListener('click', async () => {
+                            // Save updated values
+                            Object.keys(inputs).forEach(field => {
+                                productData[field] = inputs[field].value;
+                            });
+
+                            try {
+                                const response = await fetch(`/api/products/${productData._id}`, {
+                                    method: 'PUT',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify(productData)
+                                });
+                                if (response.ok) {
+                                    alert('Product updated successfully.');
+                                    toggleEditMode(false);
+                                    loadUserProduct(); // Reload product data
+                                } else {
+                                    alert('Failed to update product.');
+                                }
+                            } catch (error) {
+                                alert('Error updating product.');
+                            } finally {
+                                saveBtn.disabled = false;
+                                cancelBtn.disabled = false;
+                            }
+                        });
+
+                deleteBtn.addEventListener('click', async () => {
+                    if (confirm('Are you sure you want to delete this product?')) {
+                        try {
+                            deleteBtn.disabled = true;
+                            const response = await fetch(`/api/products/${productData._id}`, {
+                                method: 'DELETE'
+                            });
+                            if (response.ok) {
+                                alert('Product deleted.');
+                                window.location.href = 'homei.html';
+                            } else {
+                                alert('Failed to delete product.');
+                            }
+                        } catch (error) {
+                            alert('Error deleting product.');
+                        } finally {
+                            deleteBtn.disabled = false;
+                        }
+                    }
+                });
+
+                // Start in display mode
+                toggleEditMode(false);
+            } catch (error) {
+                alert('Error loading your products.');
+                window.location.href = 'homei.html';
+            }
+        }
+
+                document.addEventListener('DOMContentLoaded', loadUserProduct);
+        </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileIcon = document.getElementById('profileIcon');
+            const bagIcon = document.getElementById('bagIcon');
+            const favoritesIcon = document.getElementById('favoritesIcon');
+            const logo = document.getElementById('logo');
+
+            if (profileIcon) {
+                profileIcon.addEventListener('click', () => {
+                    window.location.href = 'profile.html';
+                });
+            }
+            if (bagIcon) {
+                bagIcon.addEventListener('click', () => {
+                    window.location.href = 'bag.html';
+                });
+            }
+            if (favoritesIcon) {
+                favoritesIcon.addEventListener('click', () => {
+                    window.location.href = '#'; // Update with actual favorites page if exists
+                });
+            }
+            if (logo) {
+                logo.addEventListener('click', () => {
+                    window.location.href = 'homei.html';
+                });
+            }
+        });
+        });
+    </script>
+</body>
+</html>

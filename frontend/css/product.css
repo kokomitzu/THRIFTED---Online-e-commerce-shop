@@ -1,0 +1,247 @@
+/* Product page specific styles */
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    gap: 30px;
+    margin-top: 120px;
+}
+
+.product-images {
+    flex: 1;
+    min-width: 300px;
+    position: relative;
+}
+
+.main-image {
+    width: 100%;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+}
+
+.thumbnail-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.thumbnail {
+    width: 60px;
+    height: 80px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    cursor: pointer;
+    object-fit: cover;
+}
+
+.product-info {
+    flex: 1;
+    min-width: 300px;
+}
+
+.product-title {
+    font-family: 'Gigantic FS';
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.product-price {
+    font-family: 'Gigantic FS';
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.product-description {
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.buy-now-btn {
+    background-color: #000;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Gigantic FS';
+    font-weight: bold;
+    width: 100%;
+}
+
+.add-to-bag-btn, .make-offer-btn {
+    background-color: white;
+    color: #000;
+    border: 1px solid #000;
+    padding: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Gigantic FS';
+    font-weight: bold;
+    width: 100%;
+}
+
+.seller-container {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    margin: 30px 0;
+    width: 100%;
+}
+
+.seller-info {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.seller-profile {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.seller-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.seller-rating {
+    color: #ffc107;
+    margin-bottom: 5px;
+}
+
+.seller-active {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.seller-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.visit-shop-btn, .chat-btn {
+    background-color: white;
+    color: #000;
+    border: 1px solid #000;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.section-title {
+    font-family: 'Gigantic FS';
+    font-size: 1.2rem;
+    margin: 30px 0 15px 0;
+    font-weight: bold;
+}
+
+.more-items {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding-bottom: 15px;
+}
+
+.item-card {
+    min-width: 150px;
+    max-width: 150px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.item-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.item-details {
+    padding: 10px;
+}
+
+.item-title {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.item-price {
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.recommended-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.recommended-item {
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.recommended-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.recommended-details {
+    padding: 10px;
+}
+
+.seller-badge {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.recommended-seller {
+    display: flex;
+    align-items: center;
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+}
+
+.like-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #666;
+    font-size: 1.2rem;
+}
+
+.show-more-btn {
+    background-color: #000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Gigantic FS';
+    margin: 20px auto;
+    display: block;
+}
